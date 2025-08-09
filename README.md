@@ -157,7 +157,6 @@ npm run email
 ### **Adding Transactions**
 - Manual entry through the dashboard
 - Upload receipts for automatic scanning
-- Import from bank statements
 - Set up recurring transactions
 
 ### **Managing Budgets**
