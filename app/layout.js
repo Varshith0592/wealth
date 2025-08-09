@@ -25,12 +25,12 @@ export default function RootLayout({ children }) {
           <main className="min-h-screen">
             {children}
           </main>
-          <Toaster richColors/>
+          <Toaster richColors />
           {/* Footer */}
           <footer className="bg-blue-50 py-12">
-              <p className="text-gray-600 text-sm text-center ">
-                © 2025 Wealth Platform. Made by Varshith
-              </p>
+            <div className="container mx-auto px-4 text-center text-gray-400">
+              Made by Varshith
+            </div>
           </footer>
         </body>
       </html>
