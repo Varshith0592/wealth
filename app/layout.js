@@ -28,9 +28,9 @@ export default function RootLayout({ children }) {
           <Toaster richColors />
           {/* Footer */}
           <footer className="bg-blue-50 py-12">
-            <div className="container mx-auto px-4 text-center text-gray-400">
-              Made by Varshith
-            </div>
+              <p className="text-gray-600 text-sm text-center ">
+                © 2025 Wealth Platform. Made by Varshith
+              </p>
           </footer>
         </body>
       </html>
