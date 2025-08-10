@@ -1,12 +1,14 @@
-"use client";
+
 
 import Link from "next/link"
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 import { Button } from "./ui/button"
 import { LayoutDashboard, PenBox } from "lucide-react"
 import { ModeToggle } from "./mode-toggle"
+import { checkUser } from "@/lib/checkUser"
 
-export default function Header() {
+export default async function Header() {
+  await checkUser()
   return (
     <div className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-border">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
