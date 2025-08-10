@@ -1,14 +1,10 @@
-
-
 import Link from "next/link"
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
-import { Button } from "./ui/button"
-import { LayoutDashboard, PenBox } from "lucide-react"
-import { ModeToggle } from "./mode-toggle"
 import { checkUser } from "@/lib/checkUser"
+import HeaderActions from "./headerActions"
 
 export default async function Header() {
-  await checkUser()
+  await checkUser() // This server-side function still runs here
+
   return (
     <div className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-border">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -18,42 +14,9 @@ export default async function Header() {
           Wealth
         </Link>
 
-        {/* Navigation & Actions */}
-        <div className="flex items-center space-x-4">
-          <SignedIn>
-            <Link href="/dashboard">
-              <Button variant="outline" className="flex items-center gap-2">
-                <LayoutDashboard size={18} />
-                <span className="hidden md:inline">Dashboard</span>
-              </Button>
-            </Link>
-            <Link href="/transaction/create">
-              <Button className="flex items-center gap-2">
-                <PenBox size={18} />
-                <span className="hidden md:inline">Add Transaction</span>
-              </Button>
-            </Link>
-          </SignedIn>
+        {/* Navigation & Actions are now handled by the client component */}
+        <HeaderActions />
 
-          <SignedOut>
-            <SignInButton forceRedirectUrl="/dashboard">
-              <Button variant="outline">Login</Button>
-            </SignInButton>
-          </SignedOut>
-
-          <SignedIn>
-            <UserButton
-              appearance={{
-                elements: {
-                  avatarBox: { height: 40, width: 40 },
-                },
-              }}
-            />
-          </SignedIn>
-
-          {/* Mode toggle at the end */}
-          <ModeToggle />
-        </div>
       </nav>
     </div>
   )
