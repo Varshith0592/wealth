@@ -1,13 +1,12 @@
+"use client";
+
 import Link from "next/link"
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 import { Button } from "./ui/button"
 import { LayoutDashboard, PenBox } from "lucide-react"
-import { checkUser } from "@/lib/checkUser"
 import { ModeToggle } from "./mode-toggle"
 
-const Header = async () => {
-  await checkUser()
-
+export default function Header() {
   return (
     <div className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-border">
       <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -57,5 +56,3 @@ const Header = async () => {
     </div>
   )
 }
-
-export default Header
