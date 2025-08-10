@@ -1,67 +1,61 @@
-
-import Image from "next/image"
 import Link from "next/link"
-import logo from "../public/logo.png"
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 import { Button } from "./ui/button"
 import { LayoutDashboard, PenBox } from "lucide-react"
 import { checkUser } from "@/lib/checkUser"
+import { ModeToggle } from "./mode-toggle"
 
+const Header = async () => {
+  await checkUser()
 
-const Header = async() => {
+  return (
+    <div className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-border">
+      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+        
+        {/* Logo as Text */}
+        <Link href="/" className="text-2xl font-bold tracking-tight text-primary hover:opacity-80 transition-opacity">
+          Wealth
+        </Link>
 
-    await checkUser()
+        {/* Navigation & Actions */}
+        <div className="flex items-center space-x-4">
+          <SignedIn>
+            <Link href="/dashboard">
+              <Button variant="outline" className="flex items-center gap-2">
+                <LayoutDashboard size={18} />
+                <span className="hidden md:inline">Dashboard</span>
+              </Button>
+            </Link>
+            <Link href="/transaction/create">
+              <Button className="flex items-center gap-2">
+                <PenBox size={18} />
+                <span className="hidden md:inline">Add Transaction</span>
+              </Button>
+            </Link>
+          </SignedIn>
 
-    return (
-        <div className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50  border-b">
-            <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
-                <Link href="/">
-                    <Image
-                        src={logo}
-                        alt="Logo"
-                        height={60}
-                        width={200}
-                        className="h-12 w-auto object-contain"
-                    />
-                </Link>
+          <SignedOut>
+            <SignInButton forceRedirectUrl="/dashboard">
+              <Button variant="outline">Login</Button>
+            </SignInButton>
+          </SignedOut>
 
-                <div className="flex items-center space-x-4">
-                    <SignedIn>
-                        <Link href={"/dashboard"} className="text-gray-600 hover:to-blue-600 flex items-center gap-2">
-                            <Button variant={"outline"}>
-                                <LayoutDashboard size={18} />
-                                <span className="hidden md:inline">Dashboard</span>
-                            </Button>
-                        </Link>
-                        <Link href={"/transaction/create"}>
-                            <Button className="flex items-center gap-2">
-                                <PenBox size={18} />
-                                <span className="hidden md:inline">Add Transaction</span>
+          <SignedIn>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: { height: 40, width: 40 },
+                },
+              }}
+            />
+          </SignedIn>
 
-                            </Button>
-                        </Link>
-                    </SignedIn>
-                    <SignedOut>
-                        <SignInButton forceRedirectUrl="/dashboard">
-                            <Button variant="outline">Login</Button>
-                        </SignInButton>
-                    </SignedOut>
-                    <SignedIn>
-                        <UserButton appearance={{
-                            elements: {
-                                avatarBox: {
-                                    height: 40,
-                                    width: 40
-                                }
-                            }
-                        }} />
-                    </SignedIn>
-                </div>
-
-
-            </nav>
+          {/* Mode toggle at the end */}
+          <ModeToggle />
         </div>
-    )
+      </nav>
+    </div>
+  )
 }
 
 export default Header

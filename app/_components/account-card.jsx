@@ -88,7 +88,7 @@ const AccountCard = ({ account }) => {
 
     return (
         <Card className="hover:shadow-md transition-shadow group relative">
-            <div className="flex items-center justify-between p-4 pb-0">
+            <div className="flex items-center justify-between px-4 pb-0">
                 <Link href={`/account/${id}`} className="flex-1">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 p-0">
                         <CardTitle className="text-xl font-medium capitalize">
